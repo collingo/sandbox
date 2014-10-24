@@ -22,5 +22,10 @@
   "bugs": {
     "url": "https://github.com/collingo/sandbox/issues"
   },
-  "homepage": "https://github.com/collingo/sandbox"
+  "homepage": "https://github.com/collingo/sandbox",
+  "dependencies": {
+    "mapper": "git+ssh://git@github.com/collingo/mapper.git",
+    "mapper-firebase": "git+https://git@github.com/collingo/mapper-firebase.git",
+    "observer": "git+ssh://git@github.com/collingo/observer.git"
+  }
 }

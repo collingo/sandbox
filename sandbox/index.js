@@ -1,59 +1,32 @@
-var walker = require('../src/walker');
-var DomAdaptor = require('./walker-dom-adaptor');
-var ObjectAdaptor = require('./walker-object-adaptor');
+var FBStore = require('mapper-firebase');
+var Mapper = require('mapper');
+var observer = require('observer');
 
-var child11 = {
-	value: 3
-}
-var child2 = {
-	value: 2
-}
-var child1 = {
-	value: 1,
-	firstChild: child11,
-	nextSibling: child2
-}
-var root = {
-	value: 0,
-	firstChild: child1
-}
-
-console.log('==========');
-console.log('===DOM====');
-console.log('==========');
-
-walker(new DomAdaptor(), root, function(node) {
-	console.log(node.value);
-});
-
-
-var test = {
-  a: {
-    a: [1,2,['a','b','c',{
-      a:11,b:22
-    }]],
-    b: {a:4,b:5,c:6},
-    c: [{
-      a: 7
-    }, {
-      a: 8
-    }, {
-      a: 9
-    }]
-  },
-  b:2,
-  c: {
-    a:1,
-    b:2
-  }
-}
-
-console.log('==========');
-console.log('==OBJECT==');
-console.log('==========');
-
-walker(new ObjectAdaptor(), test, function(node) {
-  if(typeof node !== 'object') {
-    console.log(node);
-  }
+var map = {
+	username: 'user',
+	firstname: 'firstname',
+	lastname: 'lastname',
+	town: 'town',
+	userMsg: ['firstname', 'lastname', 'town', function(firstname, lastname, town) {
+		return 'Welcome ' + firstname + ' ' + lastname + ' from ' + town;
+	}],
+	dob: 'dob',
+	age: ['dob', function(dob) {
+		var dobSplit = dob.split('/');
+		var year = parseInt(dobSplit[dobSplit.length - 1], 10);
+		var fullyear = (year < 15 ? 2000 : 1900) + year
+		return 'Roughly ' + (2014 - fullyear);
+	}],
+	starSign: ['dob', function(dob) {
+		var dobSplit = dob.split('/');
+		var month = parseInt(dobSplit[1], 10);
+		return month < 7 ? 'early' : 'late';
+	}]
+};
+var store = new FBStore("https://blinding-fire-3623.firebaseio.com/");
+var mapper = new Mapper(store, map, true);
+mapper.getViewModel().then(function(viewModel) {
+	observer(viewModel, function() {
+		console.log(arguments);
+	});
 });
