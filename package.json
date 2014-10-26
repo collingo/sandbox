@@ -4,7 +4,7 @@
   "description": "A place to mess around with various WIP packages",
   "main": "src/sandbox.js",
   "scripts": {
-    "start": "browserify src/index.js -o src/build.js"
+    "start": "browserify src/index.js -o src/build.js -d"
   },
   "repository": {
     "type": "git",
@@ -23,9 +23,8 @@
   "dependencies": {
     "browserify": "^6.2.0",
     "builder": "git+https://git@github.com/collingo/builder",
-    "jquery": "^2.1.1",
     "mapper": "git+https://git@github.com/collingo/mapper.git",
     "mapper-firebase": "git+https://git@github.com/collingo/mapper-firebase.git",
-    "observer": "git+https://git@github.com/collingo/observer.git"
+    "stitcher": "git+https://git@github.com/collingo/stitcher"
   }
 }

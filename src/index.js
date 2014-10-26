@@ -1,8 +1,7 @@
 var FBStore = require('mapper-firebase');
 var Mapper = require('mapper');
-var observer = require('observer');
 var builder = require('builder');
-var $ = require('jquery');
+var stitcher = require('stitcher');
 
 var map = {
 	username: 'user',
@@ -27,13 +26,10 @@ var map = {
 };
 var tpl = '<dl>' + Object.keys(map).map(function(key) {
 	return '<dt>'+key+'</dt><dd>{{'+key+'}}</dd>';
-}) + '</dl>';
+}).join('') + '</dl>';
 var store = new FBStore("https://blinding-fire-3623.firebaseio.com/");
 var mapper = new Mapper(store, map, true);
 mapper.getViewModel().then(function(viewModel) {
-	$('body').html(builder(viewModel, tpl));
-	observer(viewModel, function() {
-		console.log(arguments);
-		$('body').html(builder(viewModel, tpl));
-	});
+	document.body.innerHTML = builder(viewModel, tpl);
+	stitcher(viewModel, tpl, document.querySelector('dl'));
 });
