@@ -4,7 +4,7 @@
   "description": "A place to mess around with various WIP packages",
   "main": "src/sandbox.js",
   "scripts": {
-    "start": "browserify sandbox/index.js -o sandbox/build.js"
+    "start": "browserify src/index.js -o src/build.js"
   },
   "repository": {
     "type": "git",
