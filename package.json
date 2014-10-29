@@ -22,6 +22,7 @@
   "homepage": "https://github.com/collingo/sandbox",
   "dependencies": {
     "browserify": "^6.2.0",
+    "builder": "git+https://git@github.com/collingo/builder.git",
     "express": "^4.10.1",
     "mapper": "git+https://git@github.com/collingo/mapper.git",
     "mapper-firebase": "git+https://git@github.com/collingo/mapper-firebase.git",
