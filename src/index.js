@@ -1,6 +1,5 @@
 var FBStore = require('mapper-firebase');
 var Mapper = require('mapper');
-var builder = require('builder');
 var stitcher = require('stitcher');
 
 var map = {
