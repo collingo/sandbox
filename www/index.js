@@ -24,7 +24,7 @@ var map = {
 		return month < 7 ? 'early' : 'late';
 	}]
 };
-var tpl = '<h1>Data</h1><dl>' + Object.keys(map).map(function(key) {
+var tpl = '<dl>' + Object.keys(map).map(function(key) {
 	return '<dt>'+key+'</dt><dd>{{'+key+'}}</dd>';
 }).join('') + '</dl>';
 var store = new FBStore("https://blinding-fire-3623.firebaseio.com/");
